@@ -4,22 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help, Binary</title>
+
+    <style>
+    .header {
+        width: 100%;
+        padding: 20px;
+        text-align: left;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 20px;
+        color: darkslategrey;
+        background-color: lightblue;
+        margin: 0;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .toc {
+        width: 100%;
+        border-style: solid;
+        color: white;
+        background-color: grey;
+        padding-left: 20px;
+    }
+
+    .content {
+        max-width: 500px;
+        margin: auto;
+        padding: 20px;
+
+        border-style: solid;
+        border-color: lightgray;
+        background-color: beige;
+
+        border-radius: 20px;
+    }
+
+    input[type=text] {
+        width: 80%;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+    </style>
 </head>
-
-<style>
-.header {
-    padding: 20px;
-    text-align: left;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 20px;
-    color: darkslategrey;
-}
-
-.content {
-    max-width: 500px;
-    margin: auto;
-}
-</style>
 
 <body>
     <div class="header">
@@ -33,8 +63,8 @@
     <div class="content">
         <p>What is 1101: </p>
         <form>
-            <input placeholder="submit">
-            <button>Submit</button>
+            <input type="text" id="quest-text" placeholder="Enter your answer"><br>
+            <input type="submit" id="quest-btn" name="quest-btn" placeholder="Submit">
         </form>
     </div>
 </body>
