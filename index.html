@@ -53,7 +53,7 @@
 
 <body>
     <div class="header">
-        <h1>Help, Binary!</h1>
+        <h1 id="aa">Help, Binary!</h1>
     </div>
     <div class="toc">
         <ul>
@@ -63,9 +63,15 @@
     <div class="content">
         <p>What is 1101: </p>
         <form>
-            <input type="text" id="quest-text" placeholder="Enter your answer"><br>
-            <input type="submit" id="quest-btn" name="quest-btn" placeholder="Submit">
+            <input type="text" id="quest-txt" name="quest-txt" placeholder="Enter your answer"><br>
+            <input type="submit" id="quest-btn" name="quest-btn">
         </form>
     </div>
 </body>
+
+<script>
+    /*const quest_txt = document.getElementById('quest-txt')*/
+
+    document.getElementById('aa').textContent = 'test';
+</script>   
 </html>
