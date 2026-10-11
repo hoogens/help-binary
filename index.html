@@ -25,7 +25,6 @@
     .toc {
         width: 100%;
         border-style: solid;
-        color: white;
         background-color: grey;
         padding-left: 20px;
     }
@@ -48,6 +47,7 @@
         margin-bottom: 10px;
         box-sizing: border-box;
     }
+
     </style>
 </head>
 
@@ -62,16 +62,22 @@
     </div>
     <div class="content">
         <p>What is 1101: </p>
-        <form>
+        <form name="form">
+            <label for="quest-txt">Answer: </label>
             <input type="text" id="quest-txt" name="quest-txt" placeholder="Enter your answer"><br>
             <input type="submit" id="quest-btn" name="quest-btn">
         </form>
     </div>
-</body>
 
-<script>
-    /*const quest_txt = document.getElementById('quest-txt')*/
+    <script>
+        form.addEventListener('submit', e => {
+            let quest_txt = document.getElementById('quest-txt').value;
+            
+            e.preventDefault();
+            
+            console.log(quest_txt);
+        });
 
-    document.getElementById('aa').textContent = 'test';
-</script>   
+    </script>  
+</body> 
 </html>
