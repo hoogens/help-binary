@@ -61,8 +61,8 @@
         </ul>
     </div>
     <div class="content">
-        <p>What is 1101: </p>
-        <form name="form">
+        <p>What is <span id="bin-txt">...</span>: </p>
+        <form id="form" name="form">
             <label for="quest-txt">Answer: </label>
             <input type="text" id="quest-txt" name="quest-txt" placeholder="Enter your answer"><br>
             <input type="submit" id="quest-btn" name="quest-btn">
@@ -70,13 +70,31 @@
     </div>
 
     <script>
-        form.addEventListener('submit', e => {
-            let quest_txt = document.getElementById('quest-txt').value;
-            
+        let bin_txt = document.getElementById('bin-txt').textContent
+
+        document.getElementById('form').addEventListener('submit', e => {
             e.preventDefault();
-            
+
+            let quest_txt = document.getElementById('quest-txt').value;
+                    
             console.log(quest_txt);
         });
+
+        function getRandomInt(max){
+            return Math.floor(Math.random() * max + 1);
+        }
+
+        function decimalToBinary(decimalNumber){
+            return decimalNumber.toString(2)
+        }
+
+        const decNum = getRandomInt(15);
+        const binNum = decimalToBinary(decNum);
+
+        console.log(decNum)
+        console.log(binNum)
+
+        
 
     </script>  
 </body> 
