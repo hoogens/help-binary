@@ -12,8 +12,8 @@
         text-align: left;
         font-family: Georgia, 'Times New Roman', Times, serif;
         font-size: 20px;
-        color: darkslategrey;
-        background-color: lightblue;
+        color: #FFFFFF;
+        background-color: #0B3954;
         margin: 0;
     }
 
@@ -24,9 +24,10 @@
 
     .toc {
         width: 100%;
-        border-style: solid;
-        background-color: grey;
-        padding-left: 20px;
+        border-style: none;
+        color: #0B3954;
+        background-color: #E6EEF3;
+        padding: 10px;
     }
 
     .content {
@@ -35,8 +36,9 @@
         padding: 20px;
 
         border-style: solid;
-        border-color: lightgray;
-        background-color: beige;
+        color: #1A1A1A;
+        border-color: #0B3954;
+        background-color: #FFFFFF;
 
         border-radius: 20px;
     }
@@ -48,6 +50,13 @@
         box-sizing: border-box;
     }
 
+    input[type=submit] {
+        padding: 10px;
+        color: #FFFFFF;
+        background-color: #0B3954;
+        border-radius: 10%;
+    }
+
     </style>
 </head>
 
@@ -55,31 +64,29 @@
     <div class="header">
         <h1 id="aa">Help, Binary!</h1>
     </div>
+
     <div class="toc">
         <ul>
             <li>Binary to Number</li>
         </ul>
     </div>
+
     <div class="content">
-        <p>What is <span id="bin-txt">...</span>: </p>
+        <!-- Exercise question -->
+        <p>What is <span id="bin-txt"></span>: </p>
+
+        <!-- Form module -->
         <form id="form" name="form">
             <label for="quest-txt">Answer: </label>
             <input type="text" id="quest-txt" name="quest-txt" placeholder="Enter your answer"><br>
             <input type="submit" id="quest-btn" name="quest-btn">
         </form>
+
+        <!-- Feedback element -->
+         <p>Your answer is <span id="feedback_answer"></span></p>
     </div>
 
     <script>
-        let bin_txt = document.getElementById('bin-txt').textContent
-
-        document.getElementById('form').addEventListener('submit', e => {
-            e.preventDefault();
-
-            let quest_txt = document.getElementById('quest-txt').value;
-                    
-            console.log(quest_txt);
-        });
-
         function getRandomInt(max){
             return Math.floor(Math.random() * max + 1);
         }
@@ -87,13 +94,36 @@
         function decimalToBinary(decimalNumber){
             return decimalNumber.toString(2)
         }
+        
+        // Exercise number in decimal
+        let decNum = getRandomInt(15);
+        // Convert exercise number to binary
+        let binNum = decimalToBinary(decNum);
 
-        const decNum = getRandomInt(15);
-        const binNum = decimalToBinary(decNum);
-
+        // Inserts the binary number as question text
+        document.getElementById('bin-txt').textContent = binNum
         console.log(decNum)
-        console.log(binNum)
+        let quest_answer
 
+        document.getElementById('form').addEventListener('submit', user_answer)
+
+        function user_answer(e, quest_answer){
+            e.preventDefault();
+
+            // Users answer
+            quest_answer = document.getElementById('quest-txt').value;
+                    
+            console.log(quest_answer);
+
+            if (Number(quest_answer) === decNum) {
+                console.log('Correct')
+                document.getElementById('feedback_answer').textContent = 'Correct'
+            }
+            else {
+                console.log('Error')
+                document.getElementById('feedback_answer').textContent = 'Not correct'
+            }
+        }
         
 
     </script>  
