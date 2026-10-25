@@ -6,8 +6,12 @@
     <title>Help, Binary</title>
 
     <style>
+
+    body {
+        margin: 0
+    }
+
     .header {
-        width: 100%;
         padding: 20px;
         text-align: left;
         font-family: Georgia, 'Times New Roman', Times, serif;
@@ -23,7 +27,6 @@
     }
 
     .toc {
-        width: 100%;
         border-style: none;
         color: #0B3954;
         background-color: #E6EEF3;
@@ -86,6 +89,7 @@
          <p>Your answer is <span id="feedback_answer"></span></p>
     </div>
 
+    <!----------------------------------------------------->
     <script>
         function getRandomInt(max){
             return Math.floor(Math.random() * max + 1);
@@ -94,27 +98,8 @@
         function decimalToBinary(decimalNumber){
             return decimalNumber.toString(2)
         }
-        
-        // Exercise number in decimal
-        let decNum = getRandomInt(15);
-        // Convert exercise number to binary
-        let binNum = decimalToBinary(decNum);
 
-        // Inserts the binary number as question text
-        document.getElementById('bin-txt').textContent = binNum
-        console.log(decNum)
-        let quest_answer
-
-        document.getElementById('form').addEventListener('submit', user_answer)
-
-        function user_answer(e, quest_answer){
-            e.preventDefault();
-
-            // Users answer
-            quest_answer = document.getElementById('quest-txt').value;
-                    
-            console.log(quest_answer);
-
+        function question_feedback(quest_answer){
             if (Number(quest_answer) === decNum) {
                 console.log('Correct')
                 document.getElementById('feedback_answer').textContent = 'Correct'
@@ -124,7 +109,40 @@
                 document.getElementById('feedback_answer').textContent = 'Not correct'
             }
         }
-        
+
+        function new_question(){
+            // Exercise number in decimal
+            decNum = getRandomInt(15);
+
+            // Convert exercise number to binary
+            let binNum = decimalToBinary(decNum);
+
+            // Inserts the binary number as question text
+            document.getElementById('bin-txt').textContent = binNum
+
+            // For testing
+            console.log(decNum)
+        }
+
+        function user_answer(e){
+            e.preventDefault();
+
+            // Users answer
+            let quest_answer = document.getElementById('quest-txt').value;
+                    
+            console.log(quest_answer);
+
+            question_feedback(quest_answer)
+
+            new_question()
+
+            document.getElementById('quest-txt').value = '';
+        }
+
+        let decNum
+
+        document.getElementById('form').addEventListener('submit', user_answer)
+        new_question()
 
     </script>  
 </body> 
