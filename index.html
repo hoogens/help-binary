@@ -19,6 +19,7 @@
     body {
         margin: 0;
 
+        /*background: #E6EEF3;*/
         min-height: 100%;
 
         display: flex;
@@ -125,6 +126,12 @@
 
         <!-- Feedback element -->
          <p>Your answer is <span id="feedback_answer"></span></p>
+
+         <details>
+            <summary>How binary works</summary>
+            <p>Every position is worth double the one to its right. A 1 means “count this value”, 
+                a 0 means “skip it”. Add up the values of all the 1s to get the number. Example: 1011 = 8 + 2 + 1 = 11.</p>
+         </details>
     </div>
     
     <footer>
