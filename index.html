@@ -62,14 +62,13 @@
         border-radius: 10%;
     }
 
-    .footer {
+    footer {
         position: fixed;
         width: 100%;
-        left: 0;
 
         color: #FFFFFF;
         background-color: #0B3954;
-        font-size: 10px;
+        font-size: 14px;
     }
     </style>
 </head>
@@ -99,8 +98,6 @@
         <!-- Feedback element -->
          <p>Your answer is <span id="feedback_answer"></span></p>
     </div>
-
-    <div class="footer">
         <footer>AMS Software</footer>
     </div>
 
@@ -116,11 +113,9 @@
 
         function question_feedback(quest_answer){
             if (Number(quest_answer) === decNum) {
-                console.log('Correct')
                 document.getElementById('feedback_answer').textContent = 'Correct'
             }
             else {
-                console.log('Error')
                 document.getElementById('feedback_answer').textContent = 'Not correct'
             }
         }
@@ -145,10 +140,7 @@
             // Users answer
             let quest_answer = document.getElementById('quest-txt').value;
                     
-            console.log(quest_answer);
-
             question_feedback(quest_answer)
-
             new_question()
 
             document.getElementById('quest-txt').value = '';
