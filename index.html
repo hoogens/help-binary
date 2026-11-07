@@ -3,15 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help, Binary</title>
+    <title>Help, Binary - Learn Binary Calculation</title>
+    <meta name="description" content="Practice binary calculations">
 
     <style>
+    html {
+        height: 100%;
+    }
+
     * {
         font-family: Georgia, 'Times New Roman', Times, serif;
     }
 
     body {
-        margin: 0
+        margin: 0;
+
+        min-height: 100%;
+
+        display: flex;
+        flex-direction: column;
     }
 
     .header {
@@ -63,12 +73,14 @@
     }
 
     footer {
-        position: fixed;
         width: 100%;
 
         color: #FFFFFF;
         background-color: #0B3954;
         font-size: 14px;
+
+        padding: 10px;
+        margin-top: auto;
     }
     </style>
 </head>
@@ -98,11 +110,16 @@
         <!-- Feedback element -->
          <p>Your answer is <span id="feedback_answer"></span></p>
     </div>
-        <footer>AMS Software</footer>
-    </div>
+    
+    <footer>
+        <p>AMS Software - KvK: 93031688 - <a href="mailto:contact@amssoftware.com">Send Email</a></p>
+    </footer>
+    
 
     <!----------------------------------------------------->
     <script>
+        let decNum;
+
         function getRandomInt(max){
             return Math.floor(Math.random() * max + 1);
         }
@@ -129,9 +146,6 @@
 
             // Inserts the binary number as question text
             document.getElementById('bin-txt').textContent = binNum
-
-            // For testing
-            console.log(decNum)
         }
 
         function user_answer(e){
@@ -145,8 +159,6 @@
 
             document.getElementById('quest-txt').value = '';
         }
-
-        let decNum
 
         document.getElementById('form').addEventListener('submit', user_answer)
         new_question()
