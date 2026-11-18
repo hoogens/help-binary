@@ -188,6 +188,27 @@ summary { cursor: pointer; font-weight: bold; }
 .place span { font-family: var(--mono); background: #fff; border-radius: 10px; padding: 6px 10px; font-size: 14px; border: 2px solid #cfdbe3; }
 details p { margin: 8px 0 0; font-size: 15px; line-height: 1.5; }
 
+/* Donation box */
+.donate {
+    margin-top: 24px;
+    background: color-mix(in srgb, var(--gold) 35%, white); 
+    border: 3px solid var(--navy);
+    border-radius: var(--radius);
+    box-shadow: 0 6px 0 var(--navy);
+    padding: 20px 22px;
+    text-align: center;
+}
+.donate h2 { margin: 0 0 6px; font-size: 20px; color: var(--navy); }
+.donate p { margin: 0 0 14px; font-size: 16px; line-height: 1.5; color: var(--navy-deep); }
+.donate p b { color: var(--navy); }
+.btn.donate-btn {
+    display: inline-block; text-decoration: none;
+    color: #fff; background: var(--navy);
+    box-shadow: 0 5px 0 var(--navy-deep);
+}
+.btn.donate-btn:hover { background: #0f4a6b; }
+.btn.donate-btn:active { box-shadow: 0 1px 0 var(--navy-deep); }
+
 /* Footer */
 footer {
     width: 100%; margin-top: auto;
@@ -266,6 +287,12 @@ footer a { color: var(--gold); }
             <p data-i18n="cheat_body">Every position is worth double the one to its right. A 1 means “count this value”, a 0 means “skip it”. Add up the values of all the 1s to get the number. Example: 1011 = 8 + 2 + 1 = 11.</p>
         </details>
     </section>
+
+    <section class="donate" aria-labelledby="donate_title">
+        <h2 id="donate_title" data-i18n="donate_title">Keep this site free ☕</h2>
+        <p data-i18n-html="donate_body">Running this website costs <b>€40 per year</b>. If it helps you learn, you can chip in with a small donation. Totally optional!</p>
+        <a class="btn donate-btn" id="donate-link" href="#" target="_blank" rel="noopener noreferrer" data-i18n="donate_btn">Donate</a>
+    </section>
 </main>
 
 <footer>
@@ -276,6 +303,9 @@ footer a { color: var(--gold); }
 <script>
 (function () {
     'use strict';
+
+    /* ---------- Donation link: put your own payment link here ---------- */
+    const DONATE_URL = 'https://payment-links.mollie.com/payment/pKnKy8LiiR27zJEt9QyKj';
 
     /* ---------- Translations ---------- */
     const I18N = {
@@ -293,7 +323,10 @@ footer a { color: var(--gold); }
             yours: 'You built',
             cheat_title: 'Cheat sheet: how binary works',
             cheat_body: 'Every position is worth double the one to its right. A 1 means “count this value”, a 0 means “skip it”. Add up the values of all the 1s to get the number. Example: 1011 = 8 + 2 + 1 = 11.',
-            sum: 'Sum'
+            sum: 'Sum',
+            donate_title: 'Keep this site free ☕',
+            donate_body: 'Running this website costs <b>€40 per year</b>. If it helps you learn, you can chip in with a small donation. Totally optional!',
+            donate_btn: 'Donate'
         },
         nl: {
             tagline: 'Leer tellen zoals een computer.',
@@ -309,7 +342,10 @@ footer a { color: var(--gold); }
             yours: 'Jij maakte',
             cheat_title: 'Spiekbriefje: hoe werkt binair?',
             cheat_body: 'Elke positie is twee keer zoveel waard als de positie rechts ervan. Een 1 betekent “tel deze waarde mee”, een 0 betekent “sla over”. Tel de waarden van alle 1-en op en je hebt het getal. Voorbeeld: 1011 = 8 + 2 + 1 = 11.',
-            sum: 'Som'
+            sum: 'Som',
+            donate_title: 'Houd deze site gratis ☕',
+            donate_body: 'Deze website draaiende houden kost <b>€40 per jaar</b>. Helpt het je met leren? Dan kun je een kleine donatie doen. Helemaal vrijblijvend!',
+            donate_btn: 'Doneer'
         }
     };
 
@@ -325,7 +361,8 @@ footer a { color: var(--gold); }
         stage: $('stage'), prompt: $('prompt'), form: $('form'), input: $('quest-txt'),
         wrap: $('answer-wrap'), btn: $('quest-btn'), fb: $('feedback'),
         fbTitle: $('feedback_answer'), fbDetail: $('feedback_detail'),
-        score: $('score'), streak: $('streak'), best: $('best'), level: $('level')
+        score: $('score'), streak: $('streak'), best: $('best'), level: $('level'),
+        donate: $('donate-link')
     };
 
     const t = (k) => I18N[state.lang][k];
@@ -367,6 +404,8 @@ footer a { color: var(--gold); }
     function applyLang() {
         document.documentElement.lang = state.lang;
         document.querySelectorAll('[data-i18n]').forEach((n) => { n.textContent = t(n.dataset.i18n); });
+        // Static, trusted strings from I18N above (contain <b>), so innerHTML is safe here
+        document.querySelectorAll('[data-i18n-html]').forEach((n) => { n.innerHTML = t(n.dataset.i18nHtml); });
         document.querySelectorAll('.lang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === state.lang)));
         renderPromptAndButton();
     }
@@ -558,6 +597,7 @@ footer a { color: var(--gold); }
 
     /* ---------- Init ---------- */
     load();
+    el.donate.href = DONATE_URL;
     el.level.value = String(state.bits);
     applyLang();
     renderStats();
